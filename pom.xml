@@ -15,6 +15,8 @@
 	<description>Forum project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
+		<spring-security.version>5.7.1</spring-security.version>
+		<spring.version>5.3.20</spring.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,6 +56,13 @@
 			<artifactId>javax.persistence</artifactId>
 			<version>2.2.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+			<version>2.7.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

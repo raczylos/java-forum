@@ -1,64 +1,136 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="windows-1250" standalone="no"?>
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-06-12T22:28:30.624809200Z</date>
-  <millis>1655072910624</millis>
-  <nanos>809200</nanos>
-  <sequence>0</sequence>
-  <logger>org.apache.coyote.http11.Http11NioProtocol</logger>
-  <level>INFO</level>
-  <class>org.apache.coyote.AbstractProtocol</class>
-  <method>init</method>
+  <date>2022-06-16T19:32:05.232141Z</date>
+  <millis>1655407925232</millis>
+  <nanos>141000</nanos>
+  <sequence>140</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
   <thread>1</thread>
-  <message>Initializing ProtocolHandler ["http-nio-8080"]</message>
+  <message>Binding initialization: 2ms</message>
 </record>
 <record>
-  <date>2022-06-12T22:28:30.632787600Z</date>
-  <millis>1655072910632</millis>
-  <nanos>787600</nanos>
-  <sequence>1</sequence>
-  <logger>org.apache.catalina.core.StandardService</logger>
-  <level>INFO</level>
-  <class>org.apache.catalina.core.StandardService</class>
-  <method>startInternal</method>
+  <date>2022-06-16T19:32:05.233138600Z</date>
+  <millis>1655407925233</millis>
+  <nanos>138600</nanos>
+  <sequence>141</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
   <thread>1</thread>
-  <message>Starting service [Tomcat]</message>
+  <message>Binding indexing: 1ms</message>
 </record>
 <record>
-  <date>2022-06-12T22:28:30.633785100Z</date>
-  <millis>1655072910633</millis>
-  <nanos>785100</nanos>
-  <sequence>2</sequence>
-  <logger>org.apache.catalina.core.StandardEngine</logger>
-  <level>INFO</level>
-  <class>org.apache.catalina.core.StandardEngine</class>
-  <method>startInternal</method>
+  <date>2022-06-16T19:32:05.234135700Z</date>
+  <millis>1655407925234</millis>
+  <nanos>135700</nanos>
+  <sequence>142</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
   <thread>1</thread>
-  <message>Starting Servlet engine: [Apache Tomcat/9.0.63]</message>
+  <message>Collecting injection requests: 1ms</message>
 </record>
 <record>
-  <date>2022-06-12T22:28:30.735513600Z</date>
-  <millis>1655072910735</millis>
-  <nanos>513600</nanos>
-  <sequence>3</sequence>
-  <logger>org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]</logger>
-  <level>INFO</level>
-  <class>org.apache.catalina.core.ApplicationContext</class>
-  <method>log</method>
+  <date>2022-06-16T19:32:05.235132700Z</date>
+  <millis>1655407925235</millis>
+  <nanos>132700</nanos>
+  <sequence>143</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
   <thread>1</thread>
-  <message>Initializing Spring embedded WebApplicationContext</message>
+  <message>Binding validation: 1ms</message>
 </record>
 <record>
-  <date>2022-06-12T22:28:31.828297200Z</date>
-  <millis>1655072911828</millis>
-  <nanos>297200</nanos>
-  <sequence>4</sequence>
-  <logger>org.apache.coyote.http11.Http11NioProtocol</logger>
-  <level>INFO</level>
-  <class>org.apache.coyote.AbstractProtocol</class>
-  <method>start</method>
+  <date>2022-06-16T19:32:05.235132700Z</date>
+  <millis>1655407925235</millis>
+  <nanos>132700</nanos>
+  <sequence>144</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
   <thread>1</thread>
-  <message>Starting ProtocolHandler ["http-nio-8080"]</message>
+  <message>Static validation: 0ms</message>
+</record>
+<record>
+  <date>2022-06-16T19:32:05.236130300Z</date>
+  <millis>1655407925236</millis>
+  <nanos>130300</nanos>
+  <sequence>145</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
+  <thread>1</thread>
+  <message>Instance member validation: 1ms</message>
+</record>
+<record>
+  <date>2022-06-16T19:32:05.237128100Z</date>
+  <millis>1655407925237</millis>
+  <nanos>128100</nanos>
+  <sequence>146</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
+  <thread>1</thread>
+  <message>Provider verification: 1ms</message>
+</record>
+<record>
+  <date>2022-06-16T19:32:05.237128100Z</date>
+  <millis>1655407925237</millis>
+  <nanos>128100</nanos>
+  <sequence>147</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
+  <thread>1</thread>
+  <message>Delayed Binding initialization: 0ms</message>
+</record>
+<record>
+  <date>2022-06-16T19:32:05.238125800Z</date>
+  <millis>1655407925238</millis>
+  <nanos>125800</nanos>
+  <sequence>148</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
+  <thread>1</thread>
+  <message>Static member injection: 1ms</message>
+</record>
+<record>
+  <date>2022-06-16T19:32:05.239122300Z</date>
+  <millis>1655407925239</millis>
+  <nanos>122300</nanos>
+  <sequence>149</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
+  <thread>1</thread>
+  <message>Instance injection: 1ms</message>
+</record>
+<record>
+  <date>2022-06-16T19:32:05.240119400Z</date>
+  <millis>1655407925240</millis>
+  <nanos>119400</nanos>
+  <sequence>150</sequence>
+  <logger>com.google.inject.internal.util.Stopwatch</logger>
+  <level>FINE</level>
+  <class>com.google.inject.internal.util.Stopwatch</class>
+  <method>resetAndLog</method>
+  <thread>1</thread>
+  <message>Preloading singletons: 1ms</message>
 </record>
 </log>
