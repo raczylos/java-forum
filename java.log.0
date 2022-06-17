@@ -2,135 +2,15 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-06-16T19:32:05.232141Z</date>
-  <millis>1655407925232</millis>
-  <nanos>141000</nanos>
-  <sequence>140</sequence>
+  <date>2022-06-17T03:57:40.010923Z</date>
+  <millis>1655438260010</millis>
+  <nanos>923000</nanos>
+  <sequence>75</sequence>
   <logger>com.google.inject.internal.util.Stopwatch</logger>
   <level>FINE</level>
   <class>com.google.inject.internal.util.Stopwatch</class>
   <method>resetAndLog</method>
   <thread>1</thread>
-  <message>Binding initialization: 2ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.233138600Z</date>
-  <millis>1655407925233</millis>
-  <nanos>138600</nanos>
-  <sequence>141</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Binding indexing: 1ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.234135700Z</date>
-  <millis>1655407925234</millis>
-  <nanos>135700</nanos>
-  <sequence>142</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Collecting injection requests: 1ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.235132700Z</date>
-  <millis>1655407925235</millis>
-  <nanos>132700</nanos>
-  <sequence>143</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Binding validation: 1ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.235132700Z</date>
-  <millis>1655407925235</millis>
-  <nanos>132700</nanos>
-  <sequence>144</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Static validation: 0ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.236130300Z</date>
-  <millis>1655407925236</millis>
-  <nanos>130300</nanos>
-  <sequence>145</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Instance member validation: 1ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.237128100Z</date>
-  <millis>1655407925237</millis>
-  <nanos>128100</nanos>
-  <sequence>146</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Provider verification: 1ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.237128100Z</date>
-  <millis>1655407925237</millis>
-  <nanos>128100</nanos>
-  <sequence>147</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Delayed Binding initialization: 0ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.238125800Z</date>
-  <millis>1655407925238</millis>
-  <nanos>125800</nanos>
-  <sequence>148</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Static member injection: 1ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.239122300Z</date>
-  <millis>1655407925239</millis>
-  <nanos>122300</nanos>
-  <sequence>149</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Instance injection: 1ms</message>
-</record>
-<record>
-  <date>2022-06-16T19:32:05.240119400Z</date>
-  <millis>1655407925240</millis>
-  <nanos>119400</nanos>
-  <sequence>150</sequence>
-  <logger>com.google.inject.internal.util.Stopwatch</logger>
-  <level>FINE</level>
-  <class>com.google.inject.internal.util.Stopwatch</class>
-  <method>resetAndLog</method>
-  <thread>1</thread>
-  <message>Preloading singletons: 1ms</message>
+  <message>Preloading singletons: 3ms</message>
 </record>
 </log>

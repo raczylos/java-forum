@@ -14,19 +14,24 @@ public class ForumApplication {
 		SpringApplication.run(ForumApplication.class, args);
 	}
 
-	@GetMapping("/")
+	@GetMapping("/hello")
 	public String hello(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return String.format("Hello %s!", name);
 	}
 
-	@GetMapping("/user")
-	public String hello() {
+	@GetMapping("/for-user")
+	public String hello1() {
 		return String.format("Hello user!");
 	}
 
-	@GetMapping("/admin")
-	public String hello() {
+	@GetMapping("/for-admin")
+	public String hello2() {
 		return String.format("Hello admin!");
+	}
+
+	@GetMapping("/bye")
+	public String hello3() {
+		return String.format("bye!");
 	}
 
 }
