@@ -1,5 +1,6 @@
 package com.example.forum.user;
 
+import com.example.forum.post.Post;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,6 +34,9 @@ public class User implements UserDetails {
     @Column
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
+
+    @OneToMany(mappedBy="user", cascade=CascadeType.PERSIST, orphanRemoval=true)
+    private List<Post> posts;
 //    private boolean locked = false;
 //    private boolean enabled = false;
 
