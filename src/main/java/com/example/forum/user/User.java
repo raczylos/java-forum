@@ -17,11 +17,10 @@ import java.util.Collections;
 @EqualsAndHashCode
 @NoArgsConstructor
 @Entity
-@Table
+@Table(name="forum_user") // user table name is reserved
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
 //    private String name;
     @Column
@@ -42,8 +41,6 @@ public class User implements UserDetails {
         this.email = email;
         this.userRole = userRole;
     }
-
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

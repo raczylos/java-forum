@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
         user.setPassword(encodedPassword);
-//        userRepository.save(user);                                                  // wywala błąd jak sie używa userRepository ...
+        userRepository.save(user);  // juz nie wywala bledu ;]
 
         String message = String.format("password: %s email: %s username: %s role: %s", user.getPassword(), user.getEmail(), user.getUsername(), user.getUserRole());
         return message;

@@ -1,4 +1,4 @@
-package com.example.forum;
+package com.example.forum.post;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
