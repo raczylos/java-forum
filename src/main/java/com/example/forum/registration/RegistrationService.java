@@ -23,7 +23,7 @@ public class RegistrationService {
                         request.getUsername(),
                         request.getPassword(),
                         request.getEmail(),
-                        UserRole.USER
+                        UserRole.ADMIN
                 )
         );
 //        return "work";

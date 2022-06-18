@@ -20,7 +20,7 @@ public class ForumApplication {
 		return String.format("Hello %s!", name);
 	}
 
-	@PreAuthorize("hasAuthority('ROLE_USER')")
+//	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@GetMapping("/for-user")
 	public String hello1() {
 		return String.format("Hello user!");
