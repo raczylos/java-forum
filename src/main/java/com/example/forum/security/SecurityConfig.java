@@ -2,6 +2,8 @@ package com.example.forum.security;
 
 //import org.springframework.contex.annotation.Configuration
 
+import com.example.forum.user.UserRepository;
+import com.example.forum.user.UserRole;
 import com.example.forum.user.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -32,18 +34,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
+
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//
+//        User user = new User("Jan",
+//                getBcryptPasswordEncoder().encode("jan123"),
+//                Collections.singleton(new SimpleGrantedAuthority("ROLE_USER")));
+//        User admin = new User("admin",
+//                getBcryptPasswordEncoder().encode("admin123"),
+//                Collections.singleton(new SimpleGrantedAuthority("ROLE_ADMIN")));
+//
+//        auth.inMemoryAuthentication().withUser(user);
+//        auth.inMemoryAuthentication().withUser(admin);
+//    }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable() // we can use postman now (it should be enabled to prevent some attacks)
                 .authorizeRequests()
                 .antMatchers("/api/v*/registration/**").permitAll()
+//                .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
+                .antMatchers("/for-user").hasAnyAuthority("USER", "ADMIN")
                 .anyRequest().hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()
                 .and()
+                .rememberMe()
+                .and()
                 .logout() // we can logout using path /logout
-                .logoutSuccessUrl("/bye").permitAll();
+//                .logoutSuccessUrl("/bye").permitAll();
+                .permitAll();
 
 
     }

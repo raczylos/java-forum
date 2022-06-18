@@ -2,6 +2,7 @@ package com.example.forum;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,10 +20,12 @@ public class ForumApplication {
 		return String.format("Hello %s!", name);
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@GetMapping("/for-user")
 	public String hello1() {
 		return String.format("Hello user!");
 	}
+
 
 	@GetMapping("/for-admin")
 	public String hello2() {

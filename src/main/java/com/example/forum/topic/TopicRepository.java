@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface TopicRepository extends CrudRepository<Topic, Long> {
-    public List<Topic> findByName(String name);
+    public List<Topic> findByTitle(String title);
     public Set<Topic> findByUser(User user);
 }
