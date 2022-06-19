@@ -1,11 +1,15 @@
 package com.example.forum;
 
+import com.example.forum.user.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
 
 @SpringBootApplication
 @RestController
@@ -35,6 +39,16 @@ public class ForumApplication {
 	@GetMapping("/bye")
 	public String hello3() {
 		return String.format("bye!");
+	}
+
+	@GetMapping("/username")
+	public String currentUserName(Principal principal) {
+		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String name = user.getEmail();
+		return String.format("hello %s", name);
+
+
+
 	}
 
 }

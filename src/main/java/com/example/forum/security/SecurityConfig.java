@@ -24,6 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 
 @Configuration
@@ -56,17 +57,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v*/registration/**").permitAll()
 //                .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/for-user").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/for-user", "/username").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/for-admin").hasAuthority( "ADMIN")
                 .anyRequest().hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()
                 .and()
                 .rememberMe()
+                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+                    .key("key")
                 .and()
                 .logout() // we can logout using path /logout
 //                .logoutSuccessUrl("/bye").permitAll();
-                .permitAll();
+                .permitAll()
+                .deleteCookies("JSESSIONID", "remember-me");
 
 
     }

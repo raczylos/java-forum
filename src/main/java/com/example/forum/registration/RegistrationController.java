@@ -9,7 +9,7 @@ public class RegistrationController {
 
     private RegistrationService registrationService;
 
-    @CrossOrigin(origins= "http://localhost:3000")
+    @CrossOrigin(origins= "http://localhost:3000")  // CORS
     @PostMapping(path = "api/v1/registration")
     public String register(@RequestBody RegistrationRequest request){
         return registrationService.register(request);
