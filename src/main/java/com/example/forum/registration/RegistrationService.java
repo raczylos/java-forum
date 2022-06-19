@@ -18,12 +18,14 @@ public class RegistrationService {
         if(!validatedEmail){
             throw new IllegalStateException(String.format("%s is not valid", request.getEmail()));
         }
+
         return userService.signUpUser(
                 new User(
                         request.getUsername(),
                         request.getPassword(),
                         request.getEmail(),
-                        UserRole.ADMIN
+//                        UserRole.ADMIN
+                        UserRole.valueOf(request.getRole())  // to provide UserRole type (.getRole() is String)
                 )
         );
 //        return "work";

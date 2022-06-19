@@ -13,7 +13,7 @@ public class EmailValidator implements Predicate<String> {
         String regex = "^(.+)@(.+)$";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(email);
-        // TODO: Regex to validate
+
         return matcher.matches();
     }
 }
