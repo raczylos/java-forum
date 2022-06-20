@@ -18,7 +18,7 @@ public class RegistrationController {
 
     @CrossOrigin(origins= "http://localhost:3000")  // CORS
     @PostMapping(path = "api/v1/login")
-    public String login(@RequestBody RegistrationRequest request){
+    public String login(@RequestBody LoginRequest request){
         return registrationService.login(request);
     }
 
