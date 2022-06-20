@@ -1,6 +1,7 @@
 package com.example.forum.registration;
 
 import lombok.AllArgsConstructor;
+import org.codehaus.jettison.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -11,7 +12,7 @@ public class RegistrationController {
 
     @CrossOrigin(origins= "http://localhost:3000")  // CORS
     @PostMapping(path = "api/v1/registration")
-    public String register(@RequestBody RegistrationRequest request){
+    public JSONObject register(@RequestBody RegistrationRequest request){
         return registrationService.register(request);
     }
 

@@ -6,6 +6,7 @@ import com.example.forum.user.UserRepository;
 import com.example.forum.user.UserRole;
 import com.example.forum.user.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -34,6 +36,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private JwtProvider tokenProvider;
 
 
 //    @Override
@@ -52,25 +56,34 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable() // we can use postman now (it should be enabled to prevent some attacks)
+//        http
+//                .cors().and().csrf().disable() // we can use postman now (it should be enabled to prevent some attacks)
+//                .authorizeRequests()
+//                .antMatchers("/api/v*/registration/**").permitAll()
+////                .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
+//                .antMatchers("/for-user", "/username").hasAnyAuthority("USER", "ADMIN")
+//                .antMatchers("/for-admin").hasAuthority( "ADMIN")
+//                .anyRequest().hasRole("ADMIN")
+//                .and()
+//                .formLogin().permitAll()
+//                .and()
+//                .rememberMe()
+//                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
+//                    .key("key")
+//                .and()
+//                .logout() // we can logout using path /logout
+////                .logoutSuccessUrl("/bye").permitAll();
+//                .permitAll()
+//                .deleteCookies("JSESSIONID", "remember-me");
+        http.cors();
+        http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**").permitAll()
-//                .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
+                    .antMatchers("/api/v*/registration/**").permitAll()
+                .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/for-user", "/username").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/for-admin").hasAuthority( "ADMIN")
-                .anyRequest().hasRole("ADMIN")
-                .and()
-                .formLogin().permitAll()
-                .and()
-                .rememberMe()
-                    .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
-                    .key("key")
-                .and()
-                .logout() // we can logout using path /logout
-//                .logoutSuccessUrl("/bye").permitAll();
-                .permitAll()
-                .deleteCookies("JSESSIONID", "remember-me");
+                .anyRequest().authenticated();
+        http.apply(new JwtConfigurer(tokenProvider));
 
 
     }
