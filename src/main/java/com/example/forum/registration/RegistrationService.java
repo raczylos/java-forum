@@ -79,7 +79,6 @@ public class RegistrationService {
 
             try{
                 String username = user.getUsername();
-
                 jsonObject.put("message", "success");
                 jsonObject.put("username", user.getUsername());
                 jsonObject.put("authorities", authentication.getAuthorities());

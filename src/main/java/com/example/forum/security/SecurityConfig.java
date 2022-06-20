@@ -83,9 +83,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/for-user", "/api/v*/username/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers("/for-admin").hasAuthority( "ADMIN")
                 .anyRequest().authenticated();
+//                .anyRequest().authenticated();
         http.apply(new JwtConfigurer(tokenProvider));
-
-
     }
 
     @Override
