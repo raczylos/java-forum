@@ -9,13 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class RegistrationRequest {
-
+public class LoginRequest {
     private final String username;
     private final String password;
-    private final String passwordRepeat;
-    private final String email;
-    private final String role;
-
-
 }

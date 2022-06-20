@@ -12,8 +12,14 @@ public class RegistrationController {
 
     @CrossOrigin(origins= "http://localhost:3000")  // CORS
     @PostMapping(path = "api/v1/registration")
-    public JSONObject register(@RequestBody RegistrationRequest request){
+    public String register(@RequestBody RegistrationRequest request){
         return registrationService.register(request);
+    }
+
+    @CrossOrigin(origins= "http://localhost:3000")  // CORS
+    @PostMapping(path = "api/v1/login")
+    public String login(@RequestBody RegistrationRequest request){
+        return registrationService.login(request);
     }
 
 }
