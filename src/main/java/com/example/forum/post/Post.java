@@ -2,6 +2,9 @@ package com.example.forum.post;
 
 import com.example.forum.topic.Topic;
 import com.example.forum.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +22,7 @@ public class Post {
     @ManyToOne()
     private User user;
 
+    @JsonIgnore
     @ManyToOne()
     private Topic topic;
 

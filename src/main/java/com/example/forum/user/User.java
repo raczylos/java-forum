@@ -1,6 +1,9 @@
 package com.example.forum.user;
 
 import com.example.forum.post.Post;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +38,7 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
+    @JsonIgnore
     @OneToMany(mappedBy="user", cascade=CascadeType.PERSIST, orphanRemoval=true)
     private List<Post> posts;
 //    private boolean locked = false;

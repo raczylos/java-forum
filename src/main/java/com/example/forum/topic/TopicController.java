@@ -1,5 +1,6 @@
 package com.example.forum.topic;
 
+import com.example.forum.post.Post;
 import com.example.forum.security.JwtFilter;
 import com.example.forum.user.User;
 import com.example.forum.user.UserRepository;
@@ -12,6 +13,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class TopicController {
@@ -57,7 +60,21 @@ public class TopicController {
         }
     }
 
+    @CrossOrigin(origins="http://localhost:3000")
+    @GetMapping(path="api/v1/topics")
+    public List<Topic> getAllTopics(){
+        return topicRepository.findAll();
+    }
 
+    @CrossOrigin(origins="http://localhost:3000")
+    @GetMapping(path="api/v1/topics/{topicId}")
+    public Topic getTopic(@PathVariable String topicId){
+        boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
+        if(isTopicPresent) {
+            return topicRepository.findById(Long.parseLong(topicId)).get();
+        }
+        return null;
+    }
     // REPLY TO A TOPIC
 
     //TODO: control topics

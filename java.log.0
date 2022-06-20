@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2022-06-20T11:01:30.656956500Z</date>
+  <millis>1655722890656</millis>
+  <nanos>956500</nanos>
+  <sequence>0</sequence>
+  <logger>org.apache.coyote.http11.Http11NioProtocol</logger>
+  <level>INFO</level>
+  <class>org.apache.coyote.AbstractProtocol</class>
+  <method>init</method>
+  <thread>1</thread>
+  <message>Initializing ProtocolHandler ["http-nio-8080"]</message>
+</record>
+<record>
+  <date>2022-06-20T11:01:30.663936900Z</date>
+  <millis>1655722890663</millis>
+  <nanos>936900</nanos>
+  <sequence>1</sequence>
+  <logger>org.apache.catalina.core.StandardService</logger>
+  <level>INFO</level>
+  <class>org.apache.catalina.core.StandardService</class>
+  <method>startInternal</method>
+  <thread>1</thread>
+  <message>Starting service [Tomcat]</message>
+</record>
+<record>
+  <date>2022-06-20T11:01:30.665931400Z</date>
+  <millis>1655722890665</millis>
+  <nanos>931400</nanos>
+  <sequence>2</sequence>
+  <logger>org.apache.catalina.core.StandardEngine</logger>
+  <level>INFO</level>
+  <class>org.apache.catalina.core.StandardEngine</class>
+  <method>startInternal</method>
+  <thread>1</thread>
+  <message>Starting Servlet engine: [Apache Tomcat/9.0.63]</message>
+</record>
+<record>
+  <date>2022-06-20T11:01:30.801608200Z</date>
+  <millis>1655722890801</millis>
+  <nanos>608200</nanos>
+  <sequence>3</sequence>
+  <logger>org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]</logger>
+  <level>INFO</level>
+  <class>org.apache.catalina.core.ApplicationContext</class>
+  <method>log</method>
+  <thread>1</thread>
+  <message>Initializing Spring embedded WebApplicationContext</message>
+</record>
+<record>
+  <date>2022-06-20T11:01:32.682478100Z</date>
+  <millis>1655722892682</millis>
+  <nanos>478100</nanos>
+  <sequence>4</sequence>
+  <logger>org.apache.coyote.http11.Http11NioProtocol</logger>
+  <level>INFO</level>
+  <class>org.apache.coyote.AbstractProtocol</class>
+  <method>start</method>
+  <thread>1</thread>
+  <message>Starting ProtocolHandler ["http-nio-8080"]</message>
+</record>
+<record>
+  <date>2022-06-20T11:01:51.366024800Z</date>
+  <millis>1655722911366</millis>
+  <nanos>24800</nanos>
+  <sequence>5</sequence>
+  <logger>org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]</logger>
+  <level>INFO</level>
+  <class>org.apache.catalina.core.ApplicationContext</class>
+  <method>log</method>
+  <thread>36</thread>
+  <message>Initializing Spring DispatcherServlet 'dispatcherServlet'</message>
+</record>
