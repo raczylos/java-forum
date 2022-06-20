@@ -55,10 +55,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable() // we can use postman now (it should be enabled to prevent some attacks)
                 .authorizeRequests()
-                .antMatchers("/api/v*/registration/**").permitAll()
+                .antMatchers("/api/v*/registration/**", "/api/v1/username").permitAll()
 //                .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
-                .antMatchers("/for-user", "/username").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/for-admin").hasAuthority( "ADMIN")
+                .antMatchers("/for-user").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/for-admin").hasAuthority("ADMIN")
                 .anyRequest().hasRole("ADMIN")
                 .and()
                 .formLogin().permitAll()

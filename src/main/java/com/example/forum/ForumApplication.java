@@ -5,9 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -41,13 +39,12 @@ public class ForumApplication {
 		return String.format("bye!");
 	}
 
-	@GetMapping("/username")
+	@CrossOrigin(origins= "http://localhost:3000")  // CORS
+	@GetMapping(path = "api/v1/username")
 	public String currentUserName(Principal principal) {
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String name = user.getEmail();
-		return String.format("hello %s", name);
-
-
+			User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			String name = user.getEmail();
+			return String.format("hello %s", name);
 
 	}
 

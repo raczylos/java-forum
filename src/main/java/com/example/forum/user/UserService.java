@@ -34,6 +34,8 @@ public class UserService implements UserDetailsService {
         user.setPassword(encodedPassword);
         userRepository.save(user);  // juz nie wywala bledu ;]
 
+
+
         String message = String.format("password: %s email: %s username: %s role: %s", user.getPassword(), user.getEmail(), user.getUsername(), user.getUserRole());
         return message;
 
