@@ -1,6 +1,9 @@
 package com.example.forum.user;
 
+import com.example.forum.email.EmailService;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
 
+    private final static Logger LOGGER = LoggerFactory.getLogger(UserService.class);
     private final UserRepository userRepository ;
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -24,16 +28,22 @@ public class UserService implements UserDetailsService {
     }
 
     public String signUpUser(User user) {
-        boolean userExists = userRepository.findByEmail(user.getEmail()).isPresent();
+        boolean userEmailExists = userRepository.findByEmail(user.getEmail()).isPresent();
+        boolean userUsernameExists = userRepository.findByUsername(user.getUsername()).isPresent();
 
-        if(userExists){
-            throw new IllegalStateException("user/email already taken");
+        if(userEmailExists){
+            LOGGER.error("email already taken");
+            throw new IllegalStateException("email already taken");
+        }
+        if(userUsernameExists){
+            LOGGER.error("username already taken");
+            throw new IllegalStateException("username already taken");
         }
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
         user.setPassword(encodedPassword);
-        userRepository.save(user);  // juz nie wywala bledu ;]
-
+        userRepository.save(user);
+        LOGGER.info(String.format("user: %s created", user.getUsername()));
         String message = String.format("password: %s email: %s username: %s role: %s", user.getPassword(), user.getEmail(), user.getUsername(), user.getUserRole());
         return message;
 

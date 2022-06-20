@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import net.bytebuddy.pool.TypePool;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.eclipse.persistence.sessions.Login;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,6 +23,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Objects;
 
@@ -36,16 +39,18 @@ public class RegistrationService {
     @Autowired
     private DaoAuthenticationProvider authenticationProvider;
 
-
+    private final static Logger LOGGER = LoggerFactory.getLogger(RegistrationService.class);
 
 
     public String register(RegistrationRequest request) {
         boolean validatedEmail =  emailValidator.test(request.getEmail());
         String successMessage = "User registered successfully";
         if(!request.getPassword().equals(request.getPasswordRepeat())){
+            LOGGER.error(String.format("passwords aren't the same: %s != %s", request.getPassword(), request.getPasswordRepeat()));
             throw new IllegalStateException();
         }
         if(!validatedEmail){
+            LOGGER.error(String.format("%s is not valid", request.getEmail()));
             throw new IllegalStateException(String.format("%s is not valid", request.getEmail()));
         }
         User user = new User(
@@ -56,6 +61,7 @@ public class RegistrationService {
         userService.signUpUser(user);
 //        String text = String.format(Objects.requireNonNull(template.getText()));
         emailSender.send(request.getEmail(), templateSimpleMessage().getText());
+        LOGGER.info(String.format("%s registered successfully", request.getUsername()));
         return successMessage;
 //        return userService.signUpUser(
 //                new User(
