@@ -23,14 +23,15 @@ public class EmailService implements EmailSender{
     @Async
     public void send(String to, String email) {
         try {
+
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject("You followed post");
-//            helper.setFrom("javaforumproject@gmail.com");
             helper.setFrom("test@host.com");
             mailSender.send(message);
+            LOGGER.info("successfully sent email");
         }
         catch (MessagingException e){
             LOGGER.error("failed to send email", e);
