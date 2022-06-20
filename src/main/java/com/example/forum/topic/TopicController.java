@@ -7,13 +7,19 @@ import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class TopicController {
-    private TopicService topicService;
+
+//    private TopicService topicService;
+    @Autowired
+    private TopicRepository topicRepository;
+    @Autowired
     private UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(TopicController.class);
 
@@ -26,12 +32,14 @@ public class TopicController {
         log.info(auth.getName());
         User user;
         Topic topic;
-        boolean isUserPresent = userRepository.findByUsername(request.getUsername()).isPresent();
+        boolean isUserPresent = userRepository.findByUsername(auth.getName()).isPresent();
+        log.info(String.valueOf(isUserPresent));
+        log.info(String.valueOf(auth.getName()));
         if(isUserPresent) {
-            user = userRepository.findByUsername(request.getUsername()).get();
+            user = userRepository.findByUsername(auth.getName()).get();
             topic = new Topic(request.getTitle());
             topic.setUser(user);
-            topicService.save(topic);
+            topicRepository.save(topic);
         }
         try{
             jsonObject.put("title", request.getTitle());
@@ -51,10 +59,6 @@ public class TopicController {
 
 
     // REPLY TO A TOPIC
-    @CrossOrigin(origins="http://localhost:3000")
-    @PostMapping(path="api/v1/topics/{topicId}/reply")
-    public void replyToTopic(@PathVariable String topicId) {
 
-    }
     //TODO: control topics
 }

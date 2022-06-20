@@ -100,6 +100,7 @@ public class RegistrationService {
                 return jsonObject.toString();
             }
         }
+        LOGGER.info(String.format("%s logged in successfully", request.getUsername()));
 
         return null;
     }
@@ -108,7 +109,7 @@ public class RegistrationService {
     public SimpleMailMessage templateSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setText(
-                "This is the test email template for your email:\n%s\n");
+                "Welcome to our site");
         return message;
     }
 }
