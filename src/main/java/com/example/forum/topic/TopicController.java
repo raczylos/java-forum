@@ -31,13 +31,11 @@ public class TopicController {
     @CrossOrigin(origins="http://localhost:3000")
     @PostMapping(path="api/v1/topics/create")
     public String createTopic(Authentication auth, @RequestBody TopicCreateRequest request) {
+        log.info("creating new topic");
         JSONObject jsonObject = new JSONObject();
-        log.info(auth.getName());
         User user;
         Topic topic;
         boolean isUserPresent = userRepository.findByUsername(auth.getName()).isPresent();
-        log.info(String.valueOf(isUserPresent));
-        log.info(String.valueOf(auth.getName()));
         if(isUserPresent) {
             user = userRepository.findByUsername(auth.getName()).get();
             topic = new Topic(request.getTitle());
@@ -56,6 +54,7 @@ public class TopicController {
             } catch (JSONException e1) {
                 e1.printStackTrace();
             }
+            log.error("failed to create new topic");
             return jsonObject.toString();
         }
     }
@@ -63,19 +62,34 @@ public class TopicController {
     @CrossOrigin(origins="http://localhost:3000")
     @GetMapping(path="api/v1/topics")
     public List<Topic> getAllTopics(){
+        log.info("reading all topics");
         return topicRepository.findAll();
+    }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @DeleteMapping(path="api/v1/topics/{topicId}")
+    public String deleteTopic(@PathVariable String topicId) {
+        log.info("deleting topic " + topicId);
+        boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
+        if(isTopicPresent) {
+            topicRepository.deleteById(Long.parseLong(topicId));
+            return "success";
+        }
+        log.error("failed to delete topic " + topicId);
+        return "failure";
     }
 
     @CrossOrigin(origins="http://localhost:3000")
     @GetMapping(path="api/v1/topics/{topicId}")
     public Topic getTopic(@PathVariable String topicId){
+        log.info("reading topic " + topicId);
         boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
         if(isTopicPresent) {
             return topicRepository.findById(Long.parseLong(topicId)).get();
         }
+        log.error("cannot read topic " + topicId);
         return null;
     }
     // REPLY TO A TOPIC
 
-    //TODO: control topics
 }

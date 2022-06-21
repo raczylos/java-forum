@@ -55,7 +55,6 @@ public class JwtFilter extends OncePerRequestFilter {
                 return;
             }
         } else {
-            log.info("first time so creating token using UserResourceImpl - authenticate method");
         }
         filterChain.doFilter(request, response);
     }
