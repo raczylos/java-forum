@@ -45,7 +45,7 @@ public class User implements UserDetails {
 //    private boolean locked = false;
 //    private boolean enabled = false;
 
-    @JsonManagedReference
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "topic_follow",
