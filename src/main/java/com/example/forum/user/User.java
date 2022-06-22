@@ -17,6 +17,7 @@ import javax.persistence.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -46,13 +47,13 @@ public class User implements UserDetails {
 //    private boolean enabled = false;
 
     @JsonIgnore
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.REMOVE)
     @JoinTable(
             name = "topic_follow",
             joinColumns = @JoinColumn(name="user_id"),
             inverseJoinColumns = @JoinColumn(name="topic_id")
     )
-    List<Topic> followedTopics;
+    Set<Topic> followedTopics;
 
     public User(String username, String password, String email, UserRole userRole) {
         this.username = username;
