@@ -60,7 +60,7 @@ public class RegistrationService {
                 UserRole.valueOf(request.getRole()));  // to provide UserRole type (.getRole() is String))
         userService.signUpUser(user);
 //        String text = String.format(Objects.requireNonNull(template.getText()));
-        emailSender.send(request.getEmail(), templateSimpleMessage().getText());
+
         LOGGER.info(String.format("%s registered successfully", request.getUsername()));
         return successMessage;
 //        return userService.signUpUser(
@@ -106,10 +106,4 @@ public class RegistrationService {
     }
 
 
-    public SimpleMailMessage templateSimpleMessage() {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setText(
-                "Welcome to our site");
-        return message;
-    }
 }

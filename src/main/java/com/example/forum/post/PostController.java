@@ -1,19 +1,24 @@
 package com.example.forum.post;
 
+import com.example.forum.email.EmailSender;
 import com.example.forum.topic.Topic;
 import com.example.forum.topic.TopicRepository;
+import com.example.forum.topic.TopicUpdateRequest;
 import com.example.forum.user.User;
 import com.example.forum.user.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 public class PostController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
+    private EmailSender emailSender;
     @Autowired
     private TopicRepository topicRepository;
     @Autowired
@@ -35,11 +40,40 @@ public class PostController {
             post.setTopic(topic);
             post.setUser(user);
             postRepository.save(post);
+
+
+//            String pathString = String.format("http://localhost:3000/topics/%s", topicId);
+//            emailSender.send(user.getEmail(), templateSimpleMessage(pathString).getText());
+
             return "success";
         }
         logger.error("failed to reply to topic " + topicId);
         return "failure";
     }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @PutMapping(path="api/v1/posts/{postId}")
+    public String updateReplyToTopic(@PathVariable String postId,@RequestBody String content){
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put();
+
+        Optional<Post> post = postRepository.findById(Long.valueOf(postId));
+
+        boolean isPostPresent = post.isPresent();
+
+        if(isPostPresent) {
+
+            post.get().setContent(content);
+
+            postRepository.save(post.get());
+            logger.info("updating post " + postId);
+            return "success";
+
+        }
+        logger.info(String.format("updating post: %s failure", postId));
+        return "failure";
+    }
+
 
     @CrossOrigin(origins="http://localhost:3000")
     @DeleteMapping(path="api/v1/posts/{postId}")
@@ -54,4 +88,17 @@ public class PostController {
         logger.error("failed to delete post " + postId);
         return "failure";
     }
+
+    public SimpleMailMessage templateSimpleMessage(String pathString) {
+        pathString.replaceAll("(\\A|\\s)((http|https|ftp|mailto):\\S+)(\\s|\\z)",
+                "$1<a href=\"$2\">$2</a>$4");
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setText(String.format("New post: %s", pathString));
+        return message;
+    }
+
+
 }
+
+

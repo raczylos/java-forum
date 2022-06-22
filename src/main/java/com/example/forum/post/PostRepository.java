@@ -9,4 +9,6 @@ import java.util.Set;
 public interface PostRepository extends CrudRepository<Post, Long> {
     Set<Post> findByUser(User user);
     Set<Post> findByTopic(Topic topic);
+
+
 }

@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -81,7 +82,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/api/v*/registration/**", "/api/v*/login/**").permitAll()
                 .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/for-user", "/api/v*/username/**").hasAnyAuthority("USER", "ADMIN")
-                .antMatchers("/for-admin").hasAuthority( "ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/v*/**").hasAuthority("ADMIN")
+                .antMatchers("/for-admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
 //                .anyRequest().authenticated();
         http.apply(new JwtConfigurer(tokenProvider));

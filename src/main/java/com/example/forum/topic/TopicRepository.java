@@ -11,4 +11,6 @@ public interface TopicRepository extends JpaRepository<Topic, Long> {
     public List<Topic> findByTitle(String title);
     public Set<Topic> findByUser(User user);
     public void deleteById(Long id);
+
+
 }

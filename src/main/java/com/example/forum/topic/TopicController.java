@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class TopicController {
@@ -65,6 +66,31 @@ public class TopicController {
         log.info("reading all topics");
         return topicRepository.findAll();
     }
+    
+    @CrossOrigin(origins="http://localhost:3000")
+    @PutMapping(path="api/v1/topics/{topicId}")
+    public String updateTopic(@PathVariable String topicId, @RequestBody TopicUpdateRequest request){
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put();
+
+        Optional<Topic> topic = topicRepository.findById(Long.parseLong(topicId));
+
+        boolean isTopicPresent = topic.isPresent();
+
+        if(isTopicPresent) {
+
+            topic.get().setTitle(request.getTitle());
+
+            topicRepository.save(topic.get());
+            log.info("updating topic " + topicId);
+            return "success";
+
+        }
+        log.info(String.format("updating topic: %s failure", topicId));
+        return "failure";
+    }
+
+
 
     @CrossOrigin(origins="http://localhost:3000")
     @DeleteMapping(path="api/v1/topics/{topicId}")
