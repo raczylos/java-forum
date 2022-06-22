@@ -1,9 +1,7 @@
 package com.example.forum.post;
 
 import com.example.forum.email.EmailSender;
-import com.example.forum.topic.Topic;
-import com.example.forum.topic.TopicRepository;
-import com.example.forum.topic.TopicUpdateRequest;
+import com.example.forum.topic.*;
 import com.example.forum.user.User;
 import com.example.forum.user.UserRepository;
 import com.example.forum.user.UserRole;
@@ -21,8 +19,9 @@ public class PostController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private PostServiceImpl postServiceImpl;
-
+    private PostService postServiceImpl;
+    @Autowired
+    private TopicService topicServiceImpl;
     @Autowired
     private TopicRepository topicRepository;
     @Autowired
@@ -37,13 +36,13 @@ public class PostController {
         User user;
         Topic topic;
         boolean isUserPresent = userRepository.findByUsername(auth.getName()).isPresent();
-        boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
+        boolean isTopicPresent = topicServiceImpl.findById(Long.parseLong(topicId)).isPresent();
         if(isUserPresent && isTopicPresent) {
             user = userRepository.findByUsername(auth.getName()).get();
-            topic = topicRepository.findById(Long.parseLong(topicId)).get();
+            topic = topicServiceImpl.findById(Long.parseLong(topicId)).get();
             post.setTopic(topic);
             post.setUser(user);
-            postRepository.save(post);
+            postServiceImpl.save(post);
 
 //            logger.info(user.getEmail());
             String pathString = String.format("http://localhost:3000/topics/%s", topicId);
@@ -66,7 +65,7 @@ public class PostController {
 //        JSONObject jsonObject = new JSONObject();
 //        jsonObject.put();
 
-        Optional<Post> post = postRepository.findById(Long.valueOf(postId));
+        Optional<Post> post = postServiceImpl.findById(Long.valueOf(postId));
 
         boolean isPostPresent = post.isPresent();
 
@@ -74,7 +73,7 @@ public class PostController {
 
             post.get().setContent(content);
 
-            postRepository.save(post.get());
+            postServiceImpl.save(post.get());
             logger.info("updating post " + postId);
             return "success";
 
@@ -88,7 +87,7 @@ public class PostController {
     public String reportPost(@PathVariable String postId, @RequestBody PostReportRequest request){
         logger.info("sending report post " + postId);
 
-        boolean isTopicPresent = topicRepository.findById(Long.parseLong(request.getTopicId())).isPresent();
+        boolean isTopicPresent = topicServiceImpl.findById(Long.parseLong(request.getTopicId())).isPresent();
 
         if(isTopicPresent) {
             for (User u : userRepository.findAll()) {
@@ -112,9 +111,9 @@ public class PostController {
     public String deletePost(Authentication auth, @PathVariable String postId) {
         logger.info("deleting post " + postId);
 
-        boolean isPostPresent = postRepository.findById(Long.parseLong(postId)).isPresent();
+        boolean isPostPresent = postServiceImpl.findById(Long.parseLong(postId)).isPresent();
         if(isPostPresent) {
-            postRepository.deleteById(Long.parseLong(postId));
+            postServiceImpl.deleteById(Long.parseLong(postId));
             return "success";
         }
         logger.error("failed to delete post " + postId);

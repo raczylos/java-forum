@@ -1,6 +1,7 @@
 package com.example.forum.topic;
 
 import com.example.forum.post.Post;
+import com.example.forum.post.PostService;
 import com.example.forum.post.PostServiceImpl;
 import com.example.forum.security.JwtFilter;
 import com.example.forum.user.User;
@@ -24,15 +25,18 @@ import java.util.Optional;
 @RestController
 public class TopicController {
 
-//    private TopicService topicService;
+    private static final Logger log = LoggerFactory.getLogger(TopicController.class);
     @Autowired
     private TopicRepository topicRepository;
-    @Autowired
-    private UserRepository userRepository;
-    private static final Logger log = LoggerFactory.getLogger(TopicController.class);
 
     @Autowired
-    private PostServiceImpl postServiceImpl;
+    private UserRepository userRepository;
+
+    @Autowired
+    private PostService postServiceImpl;
+
+    @Autowired
+    private TopicService topicServiceImpl;
 
     // CREATE A TOPIC
     @CrossOrigin(origins="http://localhost:3000")
@@ -47,7 +51,7 @@ public class TopicController {
             user = userRepository.findByUsername(auth.getName()).get();
             topic = new Topic(request.getTitle());
             topic.setUser(user);
-            topicRepository.save(topic);
+            topicServiceImpl.save(topic);
         }
         try{
             jsonObject.put("title", request.getTitle());
@@ -70,7 +74,7 @@ public class TopicController {
     @GetMapping(path="api/v1/topics")
     public List<Topic> getAllTopics(){
         log.info("reading all topics");
-        return topicRepository.findAll();
+        return topicServiceImpl.findAll();
     }
     
     @CrossOrigin(origins="http://localhost:3000")
@@ -79,7 +83,7 @@ public class TopicController {
 //        JSONObject jsonObject = new JSONObject();
 //        jsonObject.put();
 
-        Optional<Topic> topic = topicRepository.findById(Long.parseLong(topicId));
+        Optional<Topic> topic = topicServiceImpl.findById(Long.parseLong(topicId));
 
         boolean isTopicPresent = topic.isPresent();
 
@@ -87,7 +91,7 @@ public class TopicController {
 
             topic.get().setTitle(request.getTitle());
 
-            topicRepository.save(topic.get());
+            topicServiceImpl.save(topic.get());
             log.info("updating topic " + topicId);
             return "success";
 
@@ -100,9 +104,9 @@ public class TopicController {
     @DeleteMapping(path="api/v1/topics/{topicId}")
     public String deleteTopic(@PathVariable String topicId) {
         log.info("deleting topic " + topicId);
-        boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
+        boolean isTopicPresent = topicServiceImpl.findById(Long.parseLong(topicId)).isPresent();
         if(isTopicPresent) {
-            topicRepository.deleteById(Long.parseLong(topicId));
+            topicServiceImpl.deleteById(Long.parseLong(topicId));
             return "success";
         }
         log.error("failed to delete topic " + topicId);
@@ -113,9 +117,9 @@ public class TopicController {
     @GetMapping(path="api/v1/topics/{topicId}")
     public Topic getTopic(@PathVariable String topicId){
         log.info("reading topic " + topicId);
-        boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
+        boolean isTopicPresent = topicServiceImpl.findById(Long.parseLong(topicId)).isPresent();
         if(isTopicPresent) {
-            return topicRepository.findById(Long.parseLong(topicId)).get();
+            return topicServiceImpl.findById(Long.parseLong(topicId)).get();
         }
         log.error("cannot read topic " + topicId);
         return null;
@@ -126,13 +130,13 @@ public class TopicController {
     public String reportTopic(@PathVariable String topicId){
         log.info("sending report topic " + topicId);
 
-        boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
+        boolean isTopicPresent = topicServiceImpl.findById(Long.parseLong(topicId)).isPresent();
         if(isTopicPresent) {
             for (User u : userRepository.findAll()) {
                 if(u.getUserRole() == UserRole.ADMIN){
                     String pathString = String.format("http://localhost:3000/topics/%s", topicId);
                     String body = "Reported topic: ";
-                    String content = topicRepository.findById(Long.parseLong(topicId)).get().getTitle() + " ";
+                    String content = topicServiceImpl.findById(Long.parseLong(topicId)).get().getTitle() + " ";
 
                     postServiceImpl.sendEmail(u, pathString, body, content);
                 }
@@ -152,7 +156,7 @@ public class TopicController {
 //        JSONObject jsonObject = new JSONObject();
 //        jsonObject.put();
 
-        Optional<Topic> topic = topicRepository.findById(Long.parseLong(topicId));
+        Optional<Topic> topic = topicServiceImpl.findById(Long.parseLong(topicId));
         Optional<User> user = userRepository.findByUsername(auth.getName());
 
         boolean isTopicPresent = topic.isPresent();
@@ -162,7 +166,7 @@ public class TopicController {
 
 //            topic.get().setFollowedByUser((List<User>) user.get());
             topic.get().addFollow(user.get());
-            topicRepository.save(topic.get());
+            topicServiceImpl.save(topic.get());
             log.info("following topic " + topicId);
             return "success";
 

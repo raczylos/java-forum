@@ -41,7 +41,11 @@ public class User implements UserDetails {
     private UserRole userRole;
 
     @JsonIgnore
-    @OneToMany(mappedBy="user", cascade=CascadeType.PERSIST, orphanRemoval=true)
+    @OneToMany(mappedBy="user", cascade=CascadeType.REMOVE, orphanRemoval = true)
+    private List<Topic> topics;
+
+    @JsonIgnore
+    @OneToMany(mappedBy="user", cascade=CascadeType.REMOVE, orphanRemoval=true)
     private List<Post> posts;
 //    private boolean locked = false;
 //    private boolean enabled = false;

@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public interface TopicService {
-    Optional<Topic> findOneById(Long id);
-    Iterable<Topic> findAll();
+    Optional<Topic> findById(Long id);
+    List<Topic> findAll();
     Set<Topic> findByUser(User user);
     void save(Topic topic);
     void deleteById(Long id);

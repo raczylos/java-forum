@@ -22,14 +22,14 @@ public class Topic {
     private Long id;
     private String title;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "followedTopics", cascade = CascadeType.REMOVE)
     Set<User> follows;
 
-    @OneToMany(mappedBy="topic", orphanRemoval=true, cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy="topic", orphanRemoval=true, cascade=CascadeType.REMOVE)
     private List<Post> posts;
 
     public Topic() {}
