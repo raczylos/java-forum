@@ -6,6 +6,7 @@ import com.example.forum.topic.TopicRepository;
 import com.example.forum.topic.TopicUpdateRequest;
 import com.example.forum.user.User;
 import com.example.forum.user.UserRepository;
+import com.example.forum.user.UserRole;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,7 +49,9 @@ public class PostController {
             String pathString = String.format("http://localhost:3000/topics/%s", topicId);
 //            emailSender.send(user.getEmail(), templateSimpleMessage().getText());
             for (User u : topic.getFollows()) {
-                postServiceImpl.sendEmail(u, pathString);
+                String body = "New reply in topic: " + topic.getTitle();
+                String content = " ";
+                postServiceImpl.sendEmail(u, pathString, body, content);
             }
 
             return "success";
@@ -78,6 +81,29 @@ public class PostController {
         }
         logger.info(String.format("updating post: %s failure", postId));
         return "failure";
+    }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @PostMapping(path="api/v1/posts/{postId}/report")
+    public String reportPost(@PathVariable String postId, @RequestBody PostReportRequest request){
+        logger.info("sending report post " + postId);
+
+        boolean isTopicPresent = topicRepository.findById(Long.parseLong(request.getTopicId())).isPresent();
+
+        if(isTopicPresent) {
+            for (User u : userRepository.findAll()) {
+                if(u.getUserRole() == UserRole.ADMIN){
+                    String pathString = String.format("http://localhost:3000/topics/%s", request.getTopicId());
+                    String body = "Reported post: ";
+                    String content = request.getContent() + " ";
+                    postServiceImpl.sendEmail(u, pathString, body, content);
+                }
+
+            }
+            return "success";
+        }
+        logger.error("cannot send report post " + postId);
+        return null;
     }
 
 

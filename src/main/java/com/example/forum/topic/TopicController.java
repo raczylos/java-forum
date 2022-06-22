@@ -1,15 +1,19 @@
 package com.example.forum.topic;
 
 import com.example.forum.post.Post;
+import com.example.forum.post.PostServiceImpl;
 import com.example.forum.security.JwtFilter;
 import com.example.forum.user.User;
 import com.example.forum.user.UserRepository;
+import com.example.forum.user.UserRole;
+import com.example.forum.user.UserService;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Role;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +31,8 @@ public class TopicController {
     private UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(TopicController.class);
 
+    @Autowired
+    private PostServiceImpl postServiceImpl;
 
     // CREATE A TOPIC
     @CrossOrigin(origins="http://localhost:3000")
@@ -114,6 +120,31 @@ public class TopicController {
         log.error("cannot read topic " + topicId);
         return null;
     }
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @PostMapping(path="api/v1/topics/{topicId}/report")
+    public String reportTopic(@PathVariable String topicId){
+        log.info("sending report topic " + topicId);
+
+        boolean isTopicPresent = topicRepository.findById(Long.parseLong(topicId)).isPresent();
+        if(isTopicPresent) {
+            for (User u : userRepository.findAll()) {
+                if(u.getUserRole() == UserRole.ADMIN){
+                    String pathString = String.format("http://localhost:3000/topics/%s", topicId);
+                    String body = "Reported topic: ";
+                    String content = topicRepository.findById(Long.parseLong(topicId)).get().getTitle() + " ";
+
+                    postServiceImpl.sendEmail(u, pathString, body, content);
+                }
+
+            }
+            return "success";
+        }
+        log.error("cannot send report topic " + topicId);
+        return null;
+    }
+
+
 
     @CrossOrigin(origins="http://localhost:3000")
     @PostMapping(path="api/v1/topics/{topicId}/follow")

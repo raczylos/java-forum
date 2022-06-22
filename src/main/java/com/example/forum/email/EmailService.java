@@ -21,14 +21,14 @@ public class EmailService implements EmailSender{
 
     @Override
     @Async
-    public void send(String to, String email) {
+    public void send(String to, String email, String subject) {
         try {
 
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, "utf-8");
             helper.setText(email, true);
             helper.setTo(to);
-            helper.setSubject("You followed post");
+            helper.setSubject(subject);
             helper.setFrom("test@host.com");
             mailSender.send(message);
             LOGGER.info("successfully sent email");

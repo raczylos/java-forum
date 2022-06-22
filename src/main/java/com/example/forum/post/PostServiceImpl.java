@@ -16,17 +16,16 @@ public class PostServiceImpl implements PostService{
 
 
     @Async
-    public void sendEmail(User user, String pathString){
-        emailSender.send(user.getEmail(), templateSimpleMessage(pathString).getText());
+    public void sendEmail(User user, String pathString, String body, String content){
+        emailSender.send(user.getEmail(), templateSimpleMessage(pathString, body, content).getText(), body);
     }
 
-    public SimpleMailMessage templateSimpleMessage(String pathString) {
+    public SimpleMailMessage templateSimpleMessage(String pathString, String body, String content) {
 //        pathString.replaceAll("(\\A|\\s)((http|https|ftp|mailto):\\S+)(\\s|\\z)",
 //                "$1<a href=\"$2\">$2</a>$4");
-//        String pathString = "o";
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setText("New post: " + pathString);
+        message.setText(body + content + pathString );
         return message;
     }
 }
