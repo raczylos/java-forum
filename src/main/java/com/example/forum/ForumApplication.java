@@ -3,6 +3,7 @@ package com.example.forum;
 import com.example.forum.user.User;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,7 @@ import java.security.Principal;
 
 @SpringBootApplication
 @RestController
+@EnableAsync
 public class ForumApplication {
 
 	public static void main(String[] args) {
