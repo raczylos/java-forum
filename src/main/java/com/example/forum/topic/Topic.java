@@ -2,6 +2,7 @@ package com.example.forum.topic;
 
 import com.example.forum.post.Post;
 import com.example.forum.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Topic {
     @ManyToOne()
     private User user;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "followedTopics")
     List<User> follows;
 
