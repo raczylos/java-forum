@@ -61,3 +61,15 @@
   <thread>1</thread>
   <message>Starting ProtocolHandler ["http-nio-8080"]</message>
 </record>
+<record>
+  <date>2022-06-22T11:06:30.043418400Z</date>
+  <millis>1655895990043</millis>
+  <nanos>418400</nanos>
+  <sequence>5</sequence>
+  <logger>org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]</logger>
+  <level>INFO</level>
+  <class>org.apache.catalina.core.ApplicationContext</class>
+  <method>log</method>
+  <thread>37</thread>
+  <message>Initializing Spring DispatcherServlet 'dispatcherServlet'</message>
+</record>
