@@ -1,6 +1,7 @@
 package com.example.forum.user;
 
 import com.example.forum.post.Post;
+import com.example.forum.topic.Topic;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -43,6 +44,14 @@ public class User implements UserDetails {
     private List<Post> posts;
 //    private boolean locked = false;
 //    private boolean enabled = false;
+
+    @ManyToMany
+    @JoinTable(
+            name = "topic_follow",
+            joinColumns = @JoinColumn(name="user_id"),
+            inverseJoinColumns = @JoinColumn(name="topic_id")
+    )
+    List<Topic> followedTopics;
 
     public User(String username, String password, String email, UserRole userRole) {
         this.username = username;

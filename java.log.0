@@ -2,9 +2,9 @@
 <!DOCTYPE log SYSTEM "logger.dtd">
 <log>
 <record>
-  <date>2022-06-21T23:31:57.183647Z</date>
-  <millis>1655854317183</millis>
-  <nanos>647000</nanos>
+  <date>2022-06-22T11:01:36.981935500Z</date>
+  <millis>1655895696981</millis>
+  <nanos>935500</nanos>
   <sequence>0</sequence>
   <logger>org.apache.coyote.http11.Http11NioProtocol</logger>
   <level>INFO</level>
@@ -14,9 +14,9 @@
   <message>Initializing ProtocolHandler ["http-nio-8080"]</message>
 </record>
 <record>
-  <date>2022-06-21T23:31:57.192735600Z</date>
-  <millis>1655854317192</millis>
-  <nanos>735600</nanos>
+  <date>2022-06-22T11:01:36.991910500Z</date>
+  <millis>1655895696991</millis>
+  <nanos>910500</nanos>
   <sequence>1</sequence>
   <logger>org.apache.catalina.core.StandardService</logger>
   <level>INFO</level>
@@ -26,9 +26,9 @@
   <message>Starting service [Tomcat]</message>
 </record>
 <record>
-  <date>2022-06-21T23:31:57.194047900Z</date>
-  <millis>1655854317194</millis>
-  <nanos>47900</nanos>
+  <date>2022-06-22T11:01:36.992906500Z</date>
+  <millis>1655895696992</millis>
+  <nanos>906500</nanos>
   <sequence>2</sequence>
   <logger>org.apache.catalina.core.StandardEngine</logger>
   <level>INFO</level>
@@ -38,9 +38,9 @@
   <message>Starting Servlet engine: [Apache Tomcat/9.0.63]</message>
 </record>
 <record>
-  <date>2022-06-21T23:31:57.321049100Z</date>
-  <millis>1655854317321</millis>
-  <nanos>49100</nanos>
+  <date>2022-06-22T11:01:37.129937400Z</date>
+  <millis>1655895697129</millis>
+  <nanos>937400</nanos>
   <sequence>3</sequence>
   <logger>org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]</logger>
   <level>INFO</level>
@@ -50,9 +50,9 @@
   <message>Initializing Spring embedded WebApplicationContext</message>
 </record>
 <record>
-  <date>2022-06-21T23:31:59.206376900Z</date>
-  <millis>1655854319206</millis>
-  <nanos>376900</nanos>
+  <date>2022-06-22T11:01:39.466460Z</date>
+  <millis>1655895699466</millis>
+  <nanos>460000</nanos>
   <sequence>4</sequence>
   <logger>org.apache.coyote.http11.Http11NioProtocol</logger>
   <level>INFO</level>
@@ -60,16 +60,4 @@
   <method>start</method>
   <thread>1</thread>
   <message>Starting ProtocolHandler ["http-nio-8080"]</message>
-</record>
-<record>
-  <date>2022-06-21T23:32:01.313885400Z</date>
-  <millis>1655854321313</millis>
-  <nanos>885400</nanos>
-  <sequence>5</sequence>
-  <logger>org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]</logger>
-  <level>INFO</level>
-  <class>org.apache.catalina.core.ApplicationContext</class>
-  <method>log</method>
-  <thread>36</thread>
-  <message>Initializing Spring DispatcherServlet 'dispatcherServlet'</message>
 </record>
