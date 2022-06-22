@@ -80,12 +80,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                     .antMatchers("/api/v*/registration/**", "/api/v*/login/**").permitAll()
+                .antMatchers(HttpMethod.GET).permitAll()
                 .antMatchers("/for-user").hasAnyRole("ADMIN", "USER")
                 .antMatchers("/for-user", "/api/v*/username/**").hasAnyAuthority("USER", "ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/v*/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PUT , "/api/v*/**").hasAuthority("ADMIN")
                 .antMatchers("/for-admin").hasAuthority("ADMIN")
                 .anyRequest().authenticated();
-//                .anyRequest().authenticated();
         http.apply(new JwtConfigurer(tokenProvider));
     }
 
