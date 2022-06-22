@@ -11,6 +11,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -26,7 +27,7 @@ public class Topic {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "followedTopics")
-    List<User> follows;
+    Set<User> follows;
 
     @OneToMany(mappedBy="topic", orphanRemoval=true, cascade=CascadeType.PERSIST)
     private List<Post> posts;
