@@ -90,8 +90,6 @@ public class TopicController {
         return "failure";
     }
 
-
-
     @CrossOrigin(origins="http://localhost:3000")
     @DeleteMapping(path="api/v1/topics/{topicId}")
     public String deleteTopic(@PathVariable String topicId) {
@@ -116,6 +114,30 @@ public class TopicController {
         log.error("cannot read topic " + topicId);
         return null;
     }
-    // REPLY TO A TOPIC
+
+    @CrossOrigin(origins="http://localhost:3000")
+    @PostMapping(path="api/v1/topics/{topicId}/follow")
+    public String followTopic(@PathVariable String topicId, Authentication auth){
+//        JSONObject jsonObject = new JSONObject();
+//        jsonObject.put();
+
+        Optional<Topic> topic = topicRepository.findById(Long.parseLong(topicId));
+        Optional<User> user = userRepository.findByUsername(auth.getName());
+
+        boolean isTopicPresent = topic.isPresent();
+        boolean isUserPresent = user.isPresent();
+
+        if(isTopicPresent && isUserPresent) {
+
+//            topic.get().setFollowedByUser((List<User>) user.get());
+            topic.get().addFollow(user.get());
+            topicRepository.save(topic.get());
+            log.info("following topic " + topicId);
+            return "success";
+
+        }
+        log.info(String.format("following topic: %s failure", topicId));
+        return null;
+    }
 
 }
