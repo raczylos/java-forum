@@ -18,7 +18,10 @@ import java.util.Optional;
 @RestController
 public class PostController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
-    private EmailSender emailSender;
+
+    @Autowired
+    private PostServiceImpl postServiceImpl;
+
     @Autowired
     private TopicRepository topicRepository;
     @Autowired
@@ -41,9 +44,12 @@ public class PostController {
             post.setUser(user);
             postRepository.save(post);
 
-
-//            String pathString = String.format("http://localhost:3000/topics/%s", topicId);
-//            emailSender.send(user.getEmail(), templateSimpleMessage(pathString).getText());
+//            logger.info(user.getEmail());
+            String pathString = String.format("http://localhost:3000/topics/%s", topicId);
+//            emailSender.send(user.getEmail(), templateSimpleMessage().getText());
+            for (User u : topic.getFollows()) {
+                postServiceImpl.sendEmail(u, pathString);
+            }
 
             return "success";
         }
@@ -89,14 +95,7 @@ public class PostController {
         return "failure";
     }
 
-    public SimpleMailMessage templateSimpleMessage(String pathString) {
-        pathString.replaceAll("(\\A|\\s)((http|https|ftp|mailto):\\S+)(\\s|\\z)",
-                "$1<a href=\"$2\">$2</a>$4");
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setText(String.format("New post: %s", pathString));
-        return message;
-    }
 
 
 }
